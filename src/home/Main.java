@@ -15,7 +15,14 @@ public class Main {
 	public static void main(String[] args) {
 		Message message = new Message();
 		(new Thread(new Writer(message))).start();
-		(new Thread(new Reader(message))).start();
+		(new Thread(new Reader(message))).start(); //On initial execution of code as it is at this stage
+												   //only the first message is displayed and the application
+												   //appears frozen and you have to manually terminate the application
+												   //The problem is once one of the thread starts looping, the other one
+												   //can't change the value of empty because the thread is blocked as only
+												   //one synchronized method can run at a time so the looping thread is holding
+												   //is holding the lock for the message object while the other one is blocked waiting
+												   //for the other thread to release the lock - this is called a deadlock
 
 	}
 
